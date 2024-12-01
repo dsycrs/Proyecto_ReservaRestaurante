@@ -179,7 +179,7 @@ private ArrayList<Reserva> reservas = new ArrayList<>();
    
     private void botonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConfirmarActionPerformed
                                                                                         
-    // Capturar datos del formulario
+    // datos del formulario
     String nombre = campoNombre.getText().trim();
     String contacto = campoContacto.getText().trim();
     String diaReserva = campoDia.getText().trim(); 
@@ -188,7 +188,7 @@ private ArrayList<Reserva> reservas = new ArrayList<>();
 
     // Verificar que los campos no estan vacios
     if (nombre.isEmpty() || contacto.isEmpty() || diaReserva.isEmpty() || horaReserva.isEmpty() || textoCantidadPersonas.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Todos los campos deben estar llenos.", "Error", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Todos los campos deben estar llenos", "Error", JOptionPane.ERROR_MESSAGE);
         return;
     }
 
@@ -230,7 +230,7 @@ private ArrayList<Reserva> reservas = new ArrayList<>();
     }
     if (!esNumero) {
         JOptionPane.showMessageDialog(this, "El campo 'Cantidad de personas' debe ser un numero entero valido.", "Error", JOptionPane.ERROR_MESSAGE);
-        return; // Finaliza el método si no es un número válido
+        return; // finaliza si no es un numero valido
     }
 
     int cantidadPersonas = Integer.parseInt(textoCantidadPersonas);

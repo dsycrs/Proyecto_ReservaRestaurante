@@ -1,6 +1,8 @@
 package giu;
 
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import logica.Reserva;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -11,13 +13,14 @@ import javax.swing.JOptionPane;
  *
  * @author Daisy Ccaceres
  */
-public class Eliminar extends javax.swing.JFrame {
-
+    public class Eliminar extends javax.swing.JFrame {
+    private ArrayList <Reserva> listaReservas;
     /**
      * Creates new form Eliminar
      */
     public Eliminar() {
         initComponents();
+         listaReservas = new ArrayList<>(); 
     }
 
     /**
@@ -148,28 +151,45 @@ public class Eliminar extends javax.swing.JFrame {
     }//GEN-LAST:event_fechaReservaActionPerformed
 
     private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarActionPerformed
-     String idReserva = JOptionPane.showInputDialog(this, "Ingrese el ID de la reserva a eliminar:");
 
-        if (idReserva == null || idReserva.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Debe ingresar un ID válido.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+    String idTexto = idReserva.getText().trim();
 
-        // Buscar la reserva por ID
-        boolean encontrada = false;
-        for (Reserva reserva : reservas) {
-            if (reserva.getId().equals(idReserva)) {
-                reservas.remove(reserva);
-                encontrada = true;
-                JOptionPane.showMessageDialog(this, "Reserva con ID " + idReserva + " eliminada exitosamente.");
-                break;
-            }
-        }
+    if (idTexto.isEmpty() || !numeroEntero(idTexto)) {
+    
+    JOptionPane.showMessageDialog(this, "Por favor, ingrese un ID valido (numero entero).", "Error", JOptionPane.ERROR_MESSAGE);
+    return; // sale del metodo si no es valido
+}
 
-        if (!encontrada) {
-            JOptionPane.showMessageDialog(this, "No se encontró ninguna reserva con el ID " + idReserva, "Error", JOptionPane.ERROR_MESSAGE);
+    // texto a entero
+   int id = Integer.parseInt(idTexto);
+
+    // Variable para ver si se encontro y se elimino una reserva
+   boolean eliminado = false;
+
+    // Recorre la lista de reservas para buscar una reserva con el ID 
+    for (int i = 0; i < listaReservas.size(); i++) {
+    if (listaReservas.get(i).getId() == id) {
+        listaReservas.remove(i); // Eliminar la reserva de la lista
+        eliminado = true; 
+        break; 
+    }
+     }
+    if (eliminado) {
+    JOptionPane.showMessageDialog(this, "Reserva eliminada con exito.", "Exito", JOptionPane.INFORMATION_MESSAGE);
+     } else {
+    
+    JOptionPane.showMessageDialog(this, "No se encontro ninguna reserva con el ID proporcionado.", "Error", JOptionPane.ERROR_MESSAGE);
+}
+}
+
+    // validar si un texto representa un numero entero
+    private boolean numeroEntero(String texto) {
+    for (char c : texto.toCharArray()) {
+        if (!Character.isDigit(c)) {
+            return false;
         }
-            // TODO add your handling code here:
+    }
+    return true; 
     }//GEN-LAST:event_botonEliminarActionPerformed
 
     /**
