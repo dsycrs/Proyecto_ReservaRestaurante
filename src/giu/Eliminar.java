@@ -14,7 +14,7 @@ import logica.Reserva;
  * @author Daisy Ccaceres
  */
     public class Eliminar extends javax.swing.JFrame {
-    private ArrayList <Reserva> listaReservas;
+     private ArrayList<Reserva> listaReservas;
     /**
      * Creates new form Eliminar
      */
@@ -34,7 +34,7 @@ import logica.Reserva;
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        idReserva = new javax.swing.JTextField();
+        idEliminar = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         horaReserva = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -42,6 +42,7 @@ import logica.Reserva;
         jLabel4 = new javax.swing.JLabel();
         fechaReserva = new javax.swing.JTextField();
         botonEliminar = new javax.swing.JButton();
+        regresarMenu = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -51,7 +52,7 @@ import logica.Reserva;
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("ID de su reserva:");
 
-        idReserva.setBackground(new java.awt.Color(255, 255, 255));
+        idEliminar.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel2.setFont(new java.awt.Font("Franklin Gothic Medium", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
@@ -87,35 +88,54 @@ import logica.Reserva;
             }
         });
 
+        regresarMenu.setBackground(new java.awt.Color(165, 127, 102));
+        regresarMenu.setFont(new java.awt.Font("Franklin Gothic Medium Cond", 0, 14)); // NOI18N
+        regresarMenu.setForeground(new java.awt.Color(0, 0, 0));
+        regresarMenu.setText("Regresar");
+        regresarMenu.setBorder(null);
+        regresarMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                regresarMenuActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(46, 46, 46)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(idReserva, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
-                    .addComponent(nombreReserva)
-                    .addComponent(fechaReserva)
-                    .addComponent(horaReserva))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(407, Short.MAX_VALUE)
-                .addComponent(botonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(196, 196, 196))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 361, Short.MAX_VALUE)
+                        .addComponent(botonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(196, 196, 196))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(idEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+                            .addComponent(nombreReserva)
+                            .addComponent(fechaReserva)
+                            .addComponent(horaReserva))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(regresarMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
+                .addGap(14, 14, 14)
+                .addComponent(regresarMenu)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(idReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(idEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(nombreReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -129,7 +149,7 @@ import logica.Reserva;
                 .addComponent(horaReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addComponent(botonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -151,46 +171,17 @@ import logica.Reserva;
     }//GEN-LAST:event_fechaReservaActionPerformed
 
     private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarActionPerformed
-
-    String idTexto = idReserva.getText().trim();
-
-    if (idTexto.isEmpty() || !numeroEntero(idTexto)) {
-    
-    JOptionPane.showMessageDialog(this, "Por favor, ingrese un ID valido (numero entero).", "Error", JOptionPane.ERROR_MESSAGE);
-    return; // sale del metodo si no es valido
-}
-
-    // texto a entero
-   int id = Integer.parseInt(idTexto);
-
-    // Variable para ver si se encontro y se elimino una reserva
-   boolean eliminado = false;
-
-    // Recorre la lista de reservas para buscar una reserva con el ID 
-    for (int i = 0; i < listaReservas.size(); i++) {
-    if (listaReservas.get(i).getId() == id) {
-        listaReservas.remove(i); // Eliminar la reserva de la lista
-        eliminado = true; 
-        break; 
-    }
-     }
-    if (eliminado) {
-    JOptionPane.showMessageDialog(this, "Reserva eliminada con exito.", "Exito", JOptionPane.INFORMATION_MESSAGE);
-     } else {
-    
-    JOptionPane.showMessageDialog(this, "No se encontro ninguna reserva con el ID proporcionado.", "Error", JOptionPane.ERROR_MESSAGE);
-}
-}
-
-    // validar si un texto representa un numero entero
-    private boolean numeroEntero(String texto) {
-    for (char c : texto.toCharArray()) {
-        if (!Character.isDigit(c)) {
-            return false;
-        }
-    }
-    return true; 
+  
+               
     }//GEN-LAST:event_botonEliminarActionPerformed
+
+    private void regresarMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regresarMenuActionPerformed
+        // TODO add your handling code here:
+    //regresa al menu principal
+    this.dispose();
+    Menu menu = new Menu();
+    menu.setVisible(true);
+    }//GEN-LAST:event_regresarMenuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -231,12 +222,14 @@ import logica.Reserva;
     private javax.swing.JButton botonEliminar;
     private javax.swing.JTextField fechaReserva;
     private javax.swing.JTextField horaReserva;
-    private javax.swing.JTextField idReserva;
+    private javax.swing.JTextField idEliminar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField nombreReserva;
+    private javax.swing.JButton regresarMenu;
     // End of variables declaration//GEN-END:variables
 }
+
