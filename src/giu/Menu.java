@@ -3,18 +3,55 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package giu;
-
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JTable;
+import logica.Cliente;
+import logica.Mesa;
+import logica.Reserva;
 /**
  *
  * @author Daisy Ccaceres
  */
 public class Menu extends javax.swing.JFrame {
-
+    private DefaultTableModel tableModel;
+    private List<Reserva> reservas;           
+    private boolean[][] disponibilidad;      
+    private List<Mesa> mesas;
     /**
      * Creates new form Menu
      */
     public Menu() {
-        initComponents();
+    initComponents();
+    inicializarVariables();  
+    tableModel = new DefaultTableModel();
+    tableModel.addColumn("ID Reserva");
+    tableModel.addColumn("Nombre Cliente");
+    tableModel.addColumn("Mesa");
+    tableModel.addColumn("Horario");
+
+    jTable1.setModel(tableModel);
+    }
+    
+        private void inicializarVariables() {
+        // iniciar lista de las reservas
+        reservas = new ArrayList<>();
+
+        //iniciar la lista de las mesas 
+        mesas = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            mesas.add(new Mesa(i,4)); // mesas del 0 al 9
+        }
+
+        // iniciar la matriz de disponibilidad
+        disponibilidad = new boolean[10][24];
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 24; j++) {
+                disponibilidad[i][j] = true; // todas las mesas al principio esten disponibles
+            }
+        }
     }
 
     /**
@@ -188,7 +225,96 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void RegistrarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarReservaActionPerformed
-  
+      String nombre = JOptionPane.showInputDialog("Ingrese el nombre del cliente:");
+      String telefono = JOptionPane.showInputDialog("Ingrese el telefono del cliente:");
+
+    while (telefono.length() != 8 || !esNumero(telefono)) {
+        JOptionPane.showMessageDialog(null, "El telefono debe tener 8 caracteres");
+        telefono = JOptionPane.showInputDialog("Ingrese el telefono del cliente:");
+    }
+
+    int personas = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad de personas:"));
+
+    while (personas < 1 || personas > 4) {
+        JOptionPane.showMessageDialog(null, "La cantidad de personas debe ser entre 1 y 4");
+        personas = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad de personas:"));
+    }
+
+    Cliente nuevoCliente = new Cliente(nombre, telefono, personas);
+
+    int mesaIndex = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el numero de la mesa (0 - 9):"));
+
+    while (mesaIndex < 0 || mesaIndex >= mesas.size()) {
+        JOptionPane.showMessageDialog(null, "Numero de mesa no valido. Tiene que  ser entre 0 y 9.");
+        mesaIndex = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el numero de la mesa (0 - 9):"));
+    }
+
+    String horario = JOptionPane.showInputDialog("Ingrese el horario (HH:MM):");
+
+    while (!esFormatoHoraValido(horario)) {
+        JOptionPane.showMessageDialog(null, "El formato de la hora no es valido. Tiene ser HH:mm (24 horas).");
+        horario = JOptionPane.showInputDialog("Ingrese el horario (HH:MM):");
+    }
+
+    int horarioIndex = Integer.parseInt(horario.split(":")[0]);
+    if (disponibilidad[mesaIndex][horarioIndex]) {
+        Mesa mesaSeleccionada = mesas.get(mesaIndex);
+        mesaSeleccionada.setDisponible(false);
+        disponibilidad[mesaIndex][horarioIndex] = false;
+
+        Reserva nuevaReserva = new Reserva(nuevoCliente, mesaSeleccionada, horario);
+        reservas.add(nuevaReserva);
+
+        tableModel.addRow(new Object[]{
+            nuevaReserva.getIdReserva(),
+            nuevoCliente.getNombre(),
+            mesaSeleccionada.getNumeroMesa(),
+            horario
+        });
+
+        JOptionPane.showMessageDialog(null, "Reserva realizada correctamente");
+    } else {
+        JOptionPane.showMessageDialog(null, "La mesa no esta disponible en ese horario");
+    }
+    
+    
+    }                                            
+    private boolean esNumero(String cadena) {
+    // verifica que los caracteres sean numeros
+    for (int i = 0; i < cadena.length(); i++) {
+        if (cadena.charAt(i) < '0' || cadena.charAt(i) > '9') {
+            return false;
+        }
+    }
+    return true;
+    }
+    
+    private boolean esFormatoHoraValido(String hora) {
+    if (hora.length() != 5) return false;
+
+    String[] partes = hora.split(":");
+    if (partes.length != 2) return false;
+
+    int horas = 0;
+    int minutos = 0;
+
+    for (int i = 0; i < partes[0].length(); i++) {
+        if (partes[0].charAt(i) < '0' || partes[0].charAt(i) > '9') return false;
+        horas = horas * 10 + (partes[0].charAt(i) - '0');
+    }
+
+    for (int i = 0; i < partes[1].length(); i++) {
+        if (partes[1].charAt(i) < '0' || partes[1].charAt(i) > '9') return false;
+        minutos = minutos * 10 + (partes[1].charAt(i) - '0');
+    }
+
+    return horas >= 0 && horas < 24 && minutos >= 0 && minutos < 60;
+    }
+
+    private int obtenerHoraIndex(String hora) {
+    String[] partes = hora.split(":");
+    return Integer.parseInt(partes[0]);
+
     }//GEN-LAST:event_RegistrarReservaActionPerformed
 
     private void EliminarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarReservaActionPerformed
