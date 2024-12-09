@@ -47,13 +47,7 @@ public class Cliente {
             return;  
         }
         this.personas = personas;
-    }
-        //metodo recursivo
-        public int calcularFactorial(int numero) {
-        if (numero <= 1) {
-            return 1;
-        }
-        return numero * calcularFactorial(numero - 1);
+
     }
     // muestra los datos del cliente
     @Override

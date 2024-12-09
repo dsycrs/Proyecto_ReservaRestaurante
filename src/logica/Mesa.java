@@ -4,6 +4,7 @@
  */
 package logica;
 
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -17,6 +18,7 @@ public class Mesa {
     private int numeroMesa;
     private int capacidad;
     private boolean disponible;
+    private int personas;
 
 
     public Mesa(int numeroMesa, int capacidad) {
@@ -48,6 +50,10 @@ public class Mesa {
     public int getNumeroMesa() {
         return numeroMesa;
     }
+    
+    public void setNumeroMesa(int numeroMesa) {
+    this.numeroMesa = numeroMesa;
+    }
 
     public int getCapacidad() {
         return capacidad;
@@ -55,6 +61,20 @@ public class Mesa {
         public Mesa(int capacidad) {
         this.numeroMesa = random.nextInt(100); //asigna numero de mesa aleatorio
     }
+        
+        // Metodo recursivo para contar cuantas mesas estan disponibles para el numero de personas 
+    public int contarMesasDisponibles(List<Mesa> mesas, int index) {
+        if (index >= mesas.size()) {
+            return 0;
+        }
+        // Si la mesa es disponible y tiene la capacidad suficiente
+        if (mesas.get(index).isDisponible() && mesas.get(index).getCapacidad() >= this.personas) {
+            return 1 + contarMesasDisponibles(mesas, index + 1); // cuenta esta mesa y sigue con la siguiente
+        } else {
+            return contarMesasDisponibles(mesas, index + 1); // solo sigue con la siguiente mesa
+        }
+    }
+
 
     @Override
     public String toString() {

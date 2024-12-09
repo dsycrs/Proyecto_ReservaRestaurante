@@ -14,8 +14,9 @@ public class Reserva {
     private Cliente cliente;
     private Mesa mesa;
     private String horario;
+    private String dia;
 
-    public Reserva(Cliente cliente, Mesa mesa, String horario) {
+    public Reserva(Cliente cliente, Mesa mesa, String horario, String dia) {
         if (cliente == null || mesa == null || horario == null || horario.isEmpty()) {
             System.out.println("Error: Cliente, mesa y horario son necesarios");
             return; 
@@ -24,6 +25,7 @@ public class Reserva {
         this.cliente = cliente;
         this.mesa = mesa;
         this.horario = horario;
+        this.dia = dia;
     }
 
     // Métodos getter
